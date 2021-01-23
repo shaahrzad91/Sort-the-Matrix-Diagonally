@@ -19,3 +19,30 @@ class Solution:
                 
                 
         return mat
+
+
+####### other solution
+
+
+class Solution:
+    def diagonalSort(self, mat: List[List[int]]) -> List[List[int]]:
+        rows = len(mat)
+        cols = len(mat[0])
+        
+        storage= collections.defaultdict(list)
+        
+        for x in range(rows):
+            for y in range(cols):
+                storage[x-y].append(mat[x][y]) 
+                
+        for z in storage.keys():
+            storage[z].sort()
+            
+            
+        for x in range(rows):
+            for y in range(cols):
+                mat[x][y] = storage[x-y][0]
+                storage[x-y] = storage[x-y][1:]
+                
+                
+        return mat     
